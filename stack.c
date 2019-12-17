@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include "stack.h"
 
 /** @requires : nothing
@@ -15,7 +15,7 @@ stack create_stack() {
  *  @assigns : modifies the stack
  *  @ensures : adds the element at the stack's head
 */
-void push(stack *s, int element) {
+void push(stack *s, stack_elem element) {
     stack new_cell;
     new_cell = (stack) malloc(sizeof(int));
     new_cell->head = element;
@@ -28,8 +28,8 @@ void push(stack *s, int element) {
  *  @assigns : modifies the stack
  *  @ensures : removes the last element of the stack, and returns its value 
  */
-int pop(stack *s) {
-    int n = (*s)->head;
+stack_elem pop(stack *s) {
+    stack_elem n = (*s)->head;
     *s = (*s)->tail;
     return n;
 }
@@ -39,7 +39,7 @@ int pop(stack *s) {
  *  @assigns : modifies the stack
  *  @ensures : adds element at the index-th case of the stack
  */
-void add(stack* s, int element, int index) {
+void add(stack* s, stack_elem element, int index) {
     stack tmp, new_cell; 
     tmp = *s;
     new_cell = (stack) malloc(sizeof(int));
@@ -80,7 +80,7 @@ int length_stack(stack s) {
  *  @assigns : nothing
  *  @ensures : returns the element's first index in the stack, -1 if it's not in it
  */
-int find_first_index(stack s, int element) {
+int find_first_index(stack s, stack_elem element) {
     int index = -1;
     int count = 0;
     while (index == -1 || s != NULL) {
