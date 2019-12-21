@@ -41,10 +41,9 @@ void fill_matrix(matrix* m, matrix_elem elem) {
 */
 void print_matrix(matrix m) {
     for (int i=0; i<m.width; i++) {
-        printf("|");
         for (int j=0; j<m.length; j++) 
-            printf("%3i", m.grid[i][j]);
-        printf("|\n");
+            printf("%3c", m.grid[i][j]);
+        printf("\n");
     }
 }
 
@@ -56,7 +55,7 @@ int main(int argc, char** argv) {
     printf("Dimensions of the matrix ? \n");
     scanf("%i %i", &p, &q);
     m = create_matrix(p,q);
-    fill_matrix(&m, 3);
+    fill_matrix(&m, 'A');
     /*matrix m;
     m.length = 4;
     m.width = 4;

@@ -1,5 +1,5 @@
 #include <stdio.h>
-//#include <stdlib.h>
+#include <stdlib.h>
 #include "stack.h"
 
 /** @requires : nothing
@@ -26,7 +26,7 @@ void push(stack *s, stack_elem element) {
 
 /** @requires : valid stack pointer
  *  @assigns : modifies the stack
- *  @ensures : removes the last element of the stack, and returns its value 
+ *  @ensures : removes the last element of the stack, and returns its value. Returns 0 if stack is empty
  */
 stack_elem pop(stack *s) {
     stack_elem n = (*s)->head;

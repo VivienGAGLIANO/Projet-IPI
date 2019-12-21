@@ -2,8 +2,9 @@
 #define _MATRIX_H
 
 //Definition for general element; choose your matrix elements' type by subbing the right type name
+//The following functions will also need to be adjusted if changing matrix' type : print_matrix
 
-typedef int matrix_elem;
+typedef char matrix_elem;
 
 
 //Matrix type construction
