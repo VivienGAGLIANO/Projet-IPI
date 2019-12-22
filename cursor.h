@@ -1,6 +1,6 @@
 #ifndef _CURSOR_H
 #define _CURSOR_H
-
+#include "matrix.h"
 //Direction type enumeration
 
 enum direction {
@@ -18,6 +18,8 @@ struct cursor {
 typedef struct cursor cursor;
 
 
+//Functions for cursor type
 
+void move(cursor*, direction, matrix);
 
 #endif
