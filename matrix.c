@@ -42,7 +42,7 @@ void fill_matrix(matrix* m, matrix_elem elem) {
 void print_matrix(matrix m) {
     for (int i=0; i<m.width; i++) {
         for (int j=0; j<m.height; j++) 
-            printf("%1c", m.grid[i][j]);
+            printf("%c", m.grid[i][j]);
         printf("\n");
     }
 }
