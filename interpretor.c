@@ -137,11 +137,11 @@ int main (int argc, char** argv) {
                 break;
 
             case ']' :
-                curs.dir--;
+                curs.dir = (curs.dir - 1) % 8;
                 break;
 
             case '[' :
-                curs.dir++;
+                curs.dir = (curs.dir + 1) % 8;
                 break;
 
             case '_' :
@@ -276,11 +276,12 @@ int main (int argc, char** argv) {
                 
             case ' ' :
                 break;
+
+            case '@' :
+                return 0;
         }
         move(&curs, curs.dir, mat);
         actualize(&curr_val, curs, mat);
-        printf("(%i, %i)\n", curs.pos_x, curs.pos_y);
-
     }
 
     return 0;
