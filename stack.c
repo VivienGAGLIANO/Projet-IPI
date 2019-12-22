@@ -29,7 +29,7 @@ void push(stack *s, stack_elem element) {
  *  @ensures : removes the last element of the stack, and returns its value. Returns 0 if stack is empty
  */
 stack_elem pop(stack *s) {
-    if ((*s)->tail == NULL) 
+    if (*s == NULL) 
         return 0;
     stack_elem n = (*s)->head;
     *s = (*s)->tail;
