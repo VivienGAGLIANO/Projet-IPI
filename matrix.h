@@ -10,7 +10,7 @@ typedef char matrix_elem;
 //Matrix type construction
 
 struct matrix {
-    int length, width;
+    int height, width;
     matrix_elem** grid;
 };
 typedef struct matrix matrix;

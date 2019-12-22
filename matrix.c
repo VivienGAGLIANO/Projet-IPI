@@ -9,8 +9,8 @@
 */
 matrix create_matrix(int p, int q) {
     matrix m;
-    m.width = p;
-    m.length = q;
+    m.width = q;
+    m.height = p;
     m.grid = (matrix_elem**) malloc(p*sizeof(matrix_elem*));
     for (int i=0; i<p; i++) {
         m.grid[i] = calloc(q, sizeof(matrix_elem));
@@ -25,9 +25,9 @@ matrix create_matrix(int p, int q) {
  *  @ensures : sets every element of the matrix equal to the given element
 */
 void fill_matrix(matrix* m, matrix_elem elem) {
-    matrix new_matrix = create_matrix(m->width, m->length);
+    matrix new_matrix = create_matrix(m->width, m->height);
     for (int i=0; i<new_matrix.width; i++) {
-        for (int j=0; j<new_matrix.length; j++) {
+        for (int j=0; j<new_matrix.height; j++) {
             new_matrix.grid[i][j] = elem;
         }
     }
@@ -41,32 +41,8 @@ void fill_matrix(matrix* m, matrix_elem elem) {
 */
 void print_matrix(matrix m) {
     for (int i=0; i<m.width; i++) {
-        for (int j=0; j<m.length; j++) 
-            printf("%3c", m.grid[i][j]);
+        for (int j=0; j<m.height; j++) 
+            printf("%1c", m.grid[i][j]);
         printf("\n");
     }
-}
-
-
-
-int main(int argc, char** argv) {
-    int p, q;
-    matrix m;
-    printf("Dimensions of the matrix ? \n");
-    scanf("%i %i", &p, &q);
-    m = create_matrix(p,q);
-    fill_matrix(&m, 'A');
-    /*matrix m;
-    m.length = 4;
-    m.width = 4;
-    m.grid = (matrix_elem**) malloc(4*sizeof(matrix_elem*)); 
-    for (int i=0; i<4; i++) {
-        m.grid[i] = (matrix_elem*) calloc(4, sizeof(matrix_elem));
-        for (int j=0; j<4; j++) {
-            m.grid[i][j] = i+j;
-        }   
-    }
-    */
-    print_matrix(m);
-    return 0;
 }
