@@ -29,6 +29,8 @@ void push(stack *s, stack_elem element) {
  *  @ensures : removes the last element of the stack, and returns its value. Returns 0 if stack is empty
  */
 stack_elem pop(stack *s) {
+    if ((*s)->tail == NULL) 
+        return 0;
     stack_elem n = (*s)->head;
     *s = (*s)->tail;
     return n;
@@ -98,20 +100,10 @@ int find_first_index(stack s, stack_elem element) {
 */
 void print_stack(stack s) {
     if (s->tail == NULL) {
-        printf("[%3i]\n", s->head);
+        printf("[%1i]\n", s->head);
     }
     else {
         printf("[%3i] -> ", s->head);
         print_stack(s->tail);
     }
-}
-
-int main(int argc, char** argv) {
-    stack s = create_stack();
-    for (int i=0; i<10; i++) {
-        push(&s, i);
-    }
-    printf("%i\n", find_first_index(s, 3));
-    print_stack(s);
-    return 0;
 }
