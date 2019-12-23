@@ -1,0 +1,14 @@
+.\" Manpage for interpretor.
+.TH man 7 "21 December 2019" "1.0" "interpretor man page"
+.SH NAME
+interpretor \- runs special format .p2d programs
+.SH SYNOPSIS
+interpretor [file]
+.SH DESCRIPTION
+interpretor [file] will run given file if it is a valid .p2d program. If more than one argument are given, the ones following the first will be ignored.
+.SH OPTIONS
+interpretor does not take any options.
+.SH SEE ALSO
+debugger(7) 
+.SH AUTHOR
+Vivien Gagliano (vivien.gagliano@ensiie.fr)
