@@ -13,7 +13,7 @@ typedef enum direction direction;
 
 struct cursor {
     int pos_x, pos_y;
-    direction dir;    
+    direction dir;
 };
 typedef struct cursor cursor;
 
