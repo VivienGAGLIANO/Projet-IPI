@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <time.h>
 #include "stack.h"
 #include "matrix.h"
 #include "cursor.h"
@@ -36,16 +37,16 @@ int main (int argc, char** argv) {
     int nb_char = getline(&first_line, &size_buf, file);
     if (nb_char == -1) {
         perror("Error reading line");
-        exit(errno);        
+        exit(errno);
     }
     int width, height;
     sscanf(first_line, "%d %d", &width,&height);
     free(first_line);
 
 
-    //Initializing matrix
+    //Initializing matrix and retrieving file
 
-    matrix mat = create_matrix(width, height);
+    matrix mat = create_matrix(height, width);
     for (int i=0; i<height; i++) {
         for (int j=0; j<width; j++) {
             mat.grid[i][j] = (char) getc(file);
@@ -53,11 +54,10 @@ int main (int argc, char** argv) {
         fseek(file, 1, SEEK_CUR);
     }
     fclose(file);
-    print_matrix(mat);
-
+    //print_matrix(mat);
 
     //Initializing cursor & stack
-    
+
     cursor curs;
     curs.pos_x = 0;
     curs.pos_y = 0;
@@ -73,7 +73,7 @@ int main (int argc, char** argv) {
     //A valid .p2d programm should have a @ character, and the program's execution should lead the cursor to that character, thus ensuring this loop's end for a valid argument
     while (curr_val != '@') {
         switch (curr_val) {
-            case '+' : 
+            case '+' :
                 push(&s, pop(&s)+pop(&s));
                 break;
 
@@ -129,6 +129,7 @@ int main (int argc, char** argv) {
                 break;
 
             case '?' :
+                srandom(time(NULL));
                 curs.dir = random() % 8;
                 break;
 
@@ -196,11 +197,12 @@ int main (int argc, char** argv) {
                 a = pop(&s);
                 a = a > 255 ? 255 : a;
                 a = a < 0 ? 0 : a;
-                printf("%c\n", (char) a);
+                printf("%c", (char) a);
                 break;
 
             case '#' :
-                for (int i=0; i<pop(&s); i++) {
+                a = pop(&s);
+                for (int i=0; i<a; i++) {
                     move(&curs, curs.dir, mat);
                     actualize(&curr_val, curs, mat);
                 }
@@ -223,7 +225,7 @@ int main (int argc, char** argv) {
                 break;
 
             case '&' :
-                printf("Type in an int to push : \n");
+                printf("Enter int : \n");
                 scanf("%i", &a);
                 push(&s, a);
                 break;
@@ -270,18 +272,22 @@ int main (int argc, char** argv) {
                 push(&s,8);
                 break;
 
-            case '9' : 
+            case '9' :
                 push(&s,9);
                 break;
-                
+
             case ' ' :
                 break;
 
             case '@' :
                 return 0;
         }
+        //getchar();
         move(&curs, curs.dir, mat);
         actualize(&curr_val, curs, mat);
+        /*printf("Cursor : (%i, %i, %i)  Current element : %c  ", curs.pos_x, curs.pos_y, curs.dir, curr_val);
+        print_stack(s);
+        */
     }
 
     return 0;
