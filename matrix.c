@@ -25,9 +25,9 @@ matrix create_matrix(int p, int q) {
  *  @ensures : sets every element of the matrix equal to the given element
 */
 void fill_matrix(matrix* m, matrix_elem elem) {
-    matrix new_matrix = create_matrix(m->width, m->height);
-    for (int i=0; i<new_matrix.width; i++) {
-        for (int j=0; j<new_matrix.height; j++) {
+    matrix new_matrix = create_matrix(m->height, m->width);
+    for (int i=0; i<new_matrix.height; i++) {
+        for (int j=0; j<new_matrix.width; j++) {
             new_matrix.grid[i][j] = elem;
         }
     }
@@ -40,8 +40,8 @@ void fill_matrix(matrix* m, matrix_elem elem) {
  *  @ensures : prints the matrix' elements as a table
 */
 void print_matrix(matrix m) {
-    for (int i=0; i<m.width; i++) {
-        for (int j=0; j<m.height; j++) 
+    for (int i=0; i<m.height; i++) {
+        for (int j=0; j<m.width; j++)
             printf("%c", m.grid[i][j]);
         printf("\n");
     }
