@@ -29,7 +29,7 @@ void push(stack *s, stack_elem element) {
  *  @ensures : removes the last element of the stack, and returns its value. Returns 0 if stack is empty
  */
 stack_elem pop(stack *s) {
-    if (*s == NULL) 
+    if (*s == NULL)
         return 0;
     stack_elem n = (*s)->head;
     *s = (*s)->tail;
@@ -42,7 +42,7 @@ stack_elem pop(stack *s) {
  *  @ensures : adds element at the index-th case of the stack
  */
 void add(stack* s, stack_elem element, int index) {
-    stack tmp, new_cell; 
+    stack tmp, new_cell;
     tmp = *s;
     new_cell = (stack) malloc(sizeof(int));
     new_cell->head = element;
@@ -57,7 +57,7 @@ void add(stack* s, stack_elem element, int index) {
         }
         tmp->tail = new_cell;
     }
-    
+
 }
 
 
@@ -74,7 +74,7 @@ int length_stack(stack s) {
             count ++;
         }
     }
-    return count;  
+    return count;
 }
 
 
@@ -99,11 +99,14 @@ int find_first_index(stack s, stack_elem element) {
  *  @ensures : prints the stack
 */
 void print_stack(stack s) {
-    if (s->tail == NULL) {
-        printf("[%1i]\n", s->head);
-    }
+    if (s == NULL)
+        printf("Empty stack\n");
     else {
-        printf("[%3i] -> ", s->head);
-        print_stack(s->tail);
+        if (s->tail == NULL)
+            printf("[%1i]\n", s->head);
+        else {
+            printf("[%3i] -> ", s->head);
+            print_stack(s->tail);
+        }
     }
 }
