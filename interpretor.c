@@ -7,12 +7,18 @@
 #include "matrix.h"
 #include "cursor.h"
 
-
+/* @requires : cursor and matrix must be in each other's range
+ * @assigns : modifies new_char value
+ * @ensures : sets new_char's value to the element in matrix located in cursor's coordinate 
+ */
 void actualize(char* new_char, cursor curs, matrix mat) {
     *new_char = mat.grid[curs.pos_y][curs.pos_x];
 }
 
-
+/* @requires : valid .p2d program, in the sense that characters are disposed such as the cursor will always meet a @ if following the instructions
+ * @assigns : temporarily allocates memory for buffer when getting first line. allocates as well memory for the grid serving as copy of the file.
+ * @ensures : runs the given .p2d program. auto-controls the argument number and type.
+ */
 int main (int argc, char** argv) {
     //Argument  control
 
@@ -162,9 +168,9 @@ int main (int argc, char** argv) {
                 break;
 
             case '"' :
-                //A valid .p2d programm should have " by pairs, thus this loop ends for valid given argument
                 move(&curs, curs.dir, mat);
                 actualize(&curr_val, curs, mat);
+                //A valid .p2d programm should have " by pairs, thus this loop ends for valid given argument
                 while (curr_val != '"') {
                     push(&s, (int) curr_val);
                     move(&curs, curs.dir, mat);
