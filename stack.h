@@ -29,6 +29,7 @@ void add(stack*, stack_elem, int);
 int length_stack(stack);
 int find_first_index(stack, stack_elem);
 void print_stack(stack);
+void print_special_stack(stack);
 
 
 
