@@ -18,6 +18,10 @@ stack create_stack() {
 void push(stack *s, stack_elem element) {
     stack new_cell;
     new_cell = (stack) malloc(sizeof(int));
+    if (new_cell == NULL) {
+        perror("Memory allocation error");
+        exit(1);
+    }
     new_cell->head = element;
     new_cell->tail = *s;
     *s = new_cell;
@@ -45,6 +49,10 @@ void add(stack* s, stack_elem element, int index) {
     stack tmp, new_cell;
     tmp = *s;
     new_cell = (stack) malloc(sizeof(int));
+    if (new_cell == NULL) {
+        perror("Memory allocation error");
+        exit(1);
+    }
     new_cell->head = element;
     if (index == 0) {
         new_cell->tail = tmp;

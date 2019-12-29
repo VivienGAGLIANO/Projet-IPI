@@ -12,8 +12,16 @@ matrix create_matrix(int p, int q) {
     m.width = q;
     m.height = p;
     m.grid = (matrix_elem**) malloc(p*sizeof(matrix_elem*));
+    if (m.grid == NULL) {
+        perror("Memory allocation error");
+        exit(1);
+    }
     for (int i=0; i<p; i++) {
         m.grid[i] = calloc(q, sizeof(matrix_elem));
+        if (m.grid[i] == NULL) {
+            perror("Memory allocation error");
+            exit(1);
+        }
     }
     return m;
 }
