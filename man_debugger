@@ -6,7 +6,7 @@ debugger \- runs .p2d interpretor in debugger mode
 .B debugger 
 .IR file
 .SH DESCRIPTION
-\fBdebugger\fR \fIfile\fR will run given file if it is a valid .p2d program in debugger mode, i.e. step by step, according to the given commands. If more than one argument are given, the ones following the first will be ignored.
+\fBdebugger\fR \fIfile\fR will run given file if it is a valid .p2d program in debugger mode, i.e. step by step, according to the given commands. If more than one argument are given, the ones following the first will be ignored. Argument shouldn't exceed 500 characters.
 Will print the state of the program at every state, with the grid, cursor position, and current stack. Typing invalid command will do nothing and ask you for valid command. Typing no command will execute the previous one.
 .SH COMMANDS
 .TP
