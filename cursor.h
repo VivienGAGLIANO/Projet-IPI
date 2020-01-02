@@ -1,6 +1,8 @@
 #ifndef _CURSOR_H
 #define _CURSOR_H
 #include "matrix.h"
+
+
 //Direction type enumeration
 
 enum direction {
