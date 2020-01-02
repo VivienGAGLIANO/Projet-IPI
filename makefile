@@ -1,5 +1,4 @@
 CC = gcc -Wall -Wextra
-bin = interpretor debugger *.o
 
 
 interpretor : interpretor.c matrix.o cursor.o stack.o debugging.o
@@ -22,7 +21,7 @@ cursor.o : cursor.c cursor.h
 	
 
 clean :
-	rm -vf $(bin)
+	rm -vf interpretor debugger *.o
 
 re :
 	clear; make clean; make interpretor debugger
