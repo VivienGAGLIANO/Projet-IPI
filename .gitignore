@@ -1,5 +1,3 @@
 *.o
 Example/
-makefile
-essais.c
 rapport/
