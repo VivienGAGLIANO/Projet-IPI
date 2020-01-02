@@ -248,18 +248,18 @@ void run_one_step(matrix* mat, cursor* curs, stack* s, char* curr_val) {
  * @assigns : temporarily allocates memory for buffer when getting first line. allocates as well memory for the grid serving as copy of the file.
  * @ensures : runs the given .p2d program. auto-controls the argument number and type.
  */
-int main (int argc, char** argv) {
+int main (int argc, char** argv) {    
     //Argument  control
 
     if (argc<2) {
-        printf("%s is to be used with at least 1 argument, but will consider the first one only", argv[0]);
+        printf("%s is to be used with at least 1 argument, but will consider the first one only\n", argv[0]);
         exit(1);
     }
 
     size_t lenstr = strlen(argv[1]);
     size_t lensuffix = strlen(".p2g");
     if (!argv[1] || lensuffix > lenstr || !strncmp(argv[1] + lenstr - lensuffix, ".p2g", lensuffix)) {
-        printf("Invalid argument format");
+        printf("Invalid argument format\n");
         exit(1);
     }
 
@@ -289,7 +289,6 @@ int main (int argc, char** argv) {
         fseek(file, 1, SEEK_CUR);
     }
     fclose(file);
-    //print_matrix(mat);
 
     //Initializing cursor & stack
 
@@ -304,8 +303,8 @@ int main (int argc, char** argv) {
 
     //Debugger settings------------------------------------------------
     
-    //Enables/disables debug mode
-    int debug_mode = (argc > 2) && (! strcmp(argv[2], "1"));
+    //Enabling/disabling debug mode
+    int debug_mode = getenv("DEBUG_MODE")!=NULL;
     
     //Allows program to run one step
     int should_run = 1;
@@ -342,7 +341,7 @@ int main (int argc, char** argv) {
         perror("Memory allocation error");
         exit(1);
     }
-    for (int i=0; i<(int) sizeof(breakpoints); i++) {
+    for (int i=0; i<15; i++) {
         breakpoints[i].x = -1;
         breakpoints[i].y = -1;
     }
@@ -366,7 +365,7 @@ int main (int argc, char** argv) {
             skip_debug = 0;
         }
             
-
+        
         //Debug mode---------------------------------------------------
         if (debug_mode && !skip_debug) {
             system("clear");
@@ -509,5 +508,7 @@ int main (int argc, char** argv) {
             steps[step_count].grid = mat;
         }
     }
+    if (getenv("DEBUG_MODE") != NULL)
+        system("unset DEBUG_MODE");
     return 0;
 }
