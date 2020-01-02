@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
-    //Running interpretor, now in debug mode
+    //Running interpretor in debug mode
     char command[528] = {"DEBUG_MODE=1 ./interpretor "};
     strcat(command, argv[1]);
     system(command);    
