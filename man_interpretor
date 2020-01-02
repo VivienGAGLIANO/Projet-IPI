@@ -3,9 +3,10 @@
 .SH NAME
 interpretor \- runs special format .p2d programs
 .SH SYNOPSIS
-interpretor [file]
+.B interpretor 
+.IR file
 .SH DESCRIPTION
-interpretor [file] will run given file if it is a valid .p2d program. If more than one argument are given, the ones following the first will be ignored.
+\fBinterpretor\R  \fIfile\fR will run given file if it is a valid .p2d program. If more than one argument are given, the ones following the first will be ignored.
 .SH OPTIONS
 interpretor does not take any options.
 .SH SEE ALSO
