@@ -318,7 +318,9 @@ int main (int argc, char** argv) {
     //Variable used for user input control
     char input[256];
     char command[256];
-    int p,q;
+    int p = 1;
+    int q = 1;
+    int input_nb;
     
     //Variable used for step n command
     int skip_debug = 0;
@@ -373,8 +375,6 @@ int main (int argc, char** argv) {
             printf("\n\n");
 
             should_run = 0;
-            p = 1;
-            q = 1;
 
             if (invalid_command) {
                 printf("Invalid command, please retry\n\n");
@@ -384,18 +384,24 @@ int main (int argc, char** argv) {
 
             //Getting command from user
             fgets(input, 256, stdin);
-            sscanf(input, "%s %i %i", command, &p, &q);
+            input_nb = sscanf(input, "%s %i %i", command, &p, &q);
             bpoint.x = p;
             bpoint.y = q;
             switch (command_filter(command)) {
                 case 0 : //step
-                    if (p<=0) {
-                        printf("Can only go forward a strictly positive number of steps\nPlease try again\n");
-                        sleep(2.5);
-                    } 
-                    else {
-                        skip_debug += p;
+                    if (input_nb == 1) {
+                        skip_debug += 1;
                         should_run = 1;
+                    }
+                    else {
+                        if (p<=0) {
+                            printf("Can only go forward a strictly positive number of steps\nPlease try again\n");
+                            sleep(2.5);
+                        } 
+                        else {
+                            skip_debug += p;
+                            should_run = 1;
+                        }
                     }
                     break;
 
@@ -418,20 +424,34 @@ int main (int argc, char** argv) {
                     break;
 
                 case 4 : //prec
-                    if (p<=0) {
-                        printf("Can only go backward a strictly positive number of steps\nPlease try again\n");
-                        sleep(2.5);
-                    }
-                    else {
-                        if (step_count - p < 0) {
-                            printf("Can't go back that far\nPlease try again\n");
-                            sleep(2.5);
+                    if (input_nb == 1) {  
+                        if (step_count - 1 < 0) {
+                                printf("Can't go back that far\nPlease try again\n");
+                                sleep(2.5);
                         }
                         else {
-                            step_count -= p;
+                            step_count -= 1;
                             mat = steps[step_count].grid;
                             curs = steps[step_count].curs;
                             s = steps[step_count].stack;
+                        }   
+                    }    
+                    else {   
+                        if (p<=0) {
+                            printf("Can only go backward a strictly positive number of steps\nPlease try again\n");
+                            sleep(2.5);
+                        }
+                        else {
+                            if (step_count - p < 0) {
+                                printf("Can't go back that far\nPlease try again\n");
+                                sleep(2.5);
+                            }
+                            else {
+                                step_count -= p;
+                                mat = steps[step_count].grid;
+                                curs = steps[step_count].curs;
+                                s = steps[step_count].stack;
+                            }
                         }
                     }
                     break;
