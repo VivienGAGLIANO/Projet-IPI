@@ -452,6 +452,16 @@ int main (int argc, char** argv) {
                                 perror("Memory allocation error");
                                 exit(1);
                             }
+                            
+                            //Initializing new breakpoints to (-1, -1)
+                            for (int i=breakpoints_size - 15; i<breakpoints_size; i++) {
+                                    breakpoints[i].x = -1;
+                                    breakpoints[i].y = -1;
+                            }
+
+                            for (int i=0; i<breakpoints_size; i++) 
+                                printf("(%i, %i)\n", breakpoints[i].x, breakpoints[i].y);
+                            getchar();
                         }
 
                         breakpoints[breakpoints_count - 1] = bpoint;
@@ -508,7 +518,6 @@ int main (int argc, char** argv) {
             steps[step_count].grid = mat;
         }
     }
-    if (getenv("DEBUG_MODE") != NULL)
-        system("unset DEBUG_MODE");
+
     return 0;
 }
